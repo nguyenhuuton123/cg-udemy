@@ -1,7 +1,7 @@
 package com.codegym.udemy.dto;
 
 import com.codegym.udemy.entity.Course;
-import com.codegym.udemy.entity.Users;
+import com.codegym.udemy.entity.Student;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -20,7 +20,11 @@ public class ReviewDto {
     private Long id;
     private Double rating;
     private String comment;
+
     private Date reviewDate;
+
+    private Long studentId;
+
     private Long courseId;
-    private Long usersId;
+
 }

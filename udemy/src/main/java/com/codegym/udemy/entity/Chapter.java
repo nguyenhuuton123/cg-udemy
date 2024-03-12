@@ -6,8 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,21 +22,15 @@ import java.util.List;
 @Data
 @Builder
 @Entity
-@Table(name = "instructor")
-public class Instructor {
+@Table(name = "chapter")
+public class Chapter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int age;
-    private String expertise;
-    private String bio;
-    private String photoUrl;
-
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private AppUser appUser;
-
-    @OneToMany(mappedBy = "instructor", cascade = CascadeType.REMOVE)
-    private List<Course> courses = new ArrayList<>();
-
+    private String name;
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
+    @OneToMany(mappedBy = "chapter", cascade = CascadeType.REMOVE)
+    private List<Lesson> lessons = new ArrayList<>();
 }
