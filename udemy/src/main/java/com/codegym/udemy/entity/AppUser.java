@@ -24,8 +24,8 @@ import java.util.List;
 @Data
 @Builder
 @Entity
-@Table(name = "users")
-public class Users {
+@Table(name = "app_user")
+public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,8 +40,4 @@ public class Users {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
     )
     private List<Role> roles = new ArrayList<>();
-
-    @OneToMany (mappedBy = "users", cascade = CascadeType.REMOVE)
-    private List<Review> reviews = new ArrayList<>();
-
 }

@@ -11,31 +11,20 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-
-import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 @Entity
-@Table(name = "review")
-public class Review {
+@Table(name = "lesson")
+public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Double rating;
-    private String comment;
-    @CreationTimestamp
-    private Date reviewDate;
-
+    private String name;
+    private String videoUrl;
     @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
-
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
-
+    @JoinColumn(name = "chapter_id")
+    private Chapter chapter;
 }

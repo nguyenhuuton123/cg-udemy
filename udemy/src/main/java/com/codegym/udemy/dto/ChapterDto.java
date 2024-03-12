@@ -1,11 +1,11 @@
 package com.codegym.udemy.dto;
 
-import com.codegym.udemy.entity.AppUser;
 import com.codegym.udemy.entity.Course;
+import com.codegym.udemy.entity.Lesson;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,13 +18,9 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Builder
-public class InstructorDto {
+public class ChapterDto {
     private Long id;
-    private int age;
-    private String expertise;
-    private String bio;
-
-    private Long appUserId;
-
-    private List<Long> coursesId = new ArrayList<>();
+    private String name;
+    private Long courseId;
+    private List<Long> lessonsId = new ArrayList<>();
 }

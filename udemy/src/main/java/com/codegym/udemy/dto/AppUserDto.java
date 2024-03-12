@@ -1,7 +1,5 @@
 package com.codegym.udemy.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class RegistrationDto {
+public class AppUserDto {
     private Long id;
     private String username;
     private String password;
