@@ -1,6 +1,5 @@
 package com.codegym.udemy.dto;
 
-import com.codegym.udemy.entity.Course;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
