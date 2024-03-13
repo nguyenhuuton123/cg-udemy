@@ -1,9 +1,12 @@
 package com.codegym.udemy.controller;
 
-import com.codegym.udemy.dto.AuthRequestDTO;
-import com.codegym.udemy.dto.JwtResponseDTO;
+import com.codegym.udemy.dto.AppUserDto;
+import com.codegym.udemy.dto.AuthRequestDto;
+import com.codegym.udemy.dto.JwtResponseDto;
 import com.codegym.udemy.security.JwtService;
+import com.codegym.udemy.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,24 +19,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/")
 public class AuthController {
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private JwtService jwtService;
-
-    public AuthController(AuthenticationManager authenticationManager) {
+    private final AuthenticationManager authenticationManager;
+    private final AppUserService appUserService;
+    private final JwtService jwtService;
+@Autowired
+    public AuthController(AuthenticationManager authenticationManager, AppUserService appUserService, JwtService jwtService) {
         this.authenticationManager = authenticationManager;
+        this.appUserService = appUserService;
+        this.jwtService = jwtService;
     }
 
     @PostMapping("/login")
-    public JwtResponseDTO AuthenticateAndGetToken(@RequestBody AuthRequestDTO authRequestDTO){
+    public JwtResponseDto AuthenticateAndGetToken(@RequestBody AuthRequestDto authRequestDTO){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDTO.getUsername(), authRequestDTO.getPassword()));
         if(authentication.isAuthenticated()){
             String accessToken = jwtService.GenerateToken(authRequestDTO.getUsername());
-            return JwtResponseDTO.builder()
+            return JwtResponseDto.builder()
                     .accessToken(accessToken)
                     .build();
         } else {
             throw new UsernameNotFoundException("invalid user request..!!");
         }
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> registerUser(@RequestBody AppUserDto appUserDto) {
+        appUserService.saveUser(appUserDto);
+        return ResponseEntity.ok("User registered successfully.");
     }
 }
