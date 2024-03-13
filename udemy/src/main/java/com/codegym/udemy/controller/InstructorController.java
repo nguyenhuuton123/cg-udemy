@@ -38,6 +38,7 @@ public class InstructorController {
     }
 
     @PostMapping("/create/{userId}")
+//    @PreAuthorize("isAuthenticated() and #userId == authentication.name")
     public ResponseEntity<String> saveInstructor(@RequestBody InstructorDto instructorDto, @PathVariable Long userId, Authentication authentication) {
         instructorService.saveInstructor(userId, instructorDto);
         return ResponseEntity.ok("Instructor saved successfully.");
