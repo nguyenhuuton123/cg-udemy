@@ -77,6 +77,7 @@ public class InstructorServiceImpl implements InstructorService {
             // If no existing Instructor is found, proceed to save the new Instructor
             try {
                 String imageUrl = firebaseStorageService.uploadFile(file);
+                instructorDto.setAppUserId(appUserId);
                 instructorDto.setPhotoUrl(imageUrl);
             } catch (IOException e) {
                 throw new IllegalStateException("Can't upload profile picture");
