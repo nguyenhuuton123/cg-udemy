@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+
+/udemy/src/main/resources/firebase-private-key.json
