@@ -1,1 +1,1 @@
-# cg-udemy
+# cg-udemy-service
